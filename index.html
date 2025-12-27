@@ -1,292 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure Cashback Portal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #6366f1;
-            --primary-hover: #4f46e5;
-            --success: #10b981;
-            --error: #ef4444;
-            --bg: #0f172a;
-            --card-bg: rgba(30, 41, 59, 0.7);
-            --text-main: #f8fafc;
-            --text-dim: #94a3b8;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Torka Store</title>
 
-        * { box-sizing: border-box; font-family: 'Inter', sans-serif; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        
-        body {
-            margin: 0;
-            min-height: 100vh;
-            background: radial-gradient(circle at top right, #1e1b4b, #0f172a);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            color: var(--text-main);
-        }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
-        .app {
-            width: 100%;
-            max-width: 400px;
-            background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 32px;
-            padding: 30px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
-        }
+<style>
+:root{
+  --bg:#020617;
+  --card:#111827;
+  --primary:#22d3ee;
+  --secondary:#a855f7;
+  --text:#e5e7eb;
+}
 
-        /* Top Support Link */
-        .top-bar {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 10px;
-        }
-        .support-btn {
-            font-size: 12px;
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-dim);
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            text-decoration: none;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .support-btn:hover { background: rgba(99, 102, 241, 0.2); color: #fff; }
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+body{background:linear-gradient(135deg,#020617,#020617);color:var(--text);}
 
-        /* Header Section */
-        .header { text-align: center; margin-bottom: 25px; }
-        .logo-ring {
-            width: 90px;
-            height: 90px;
-            margin: 0 auto 15px;
-            padding: 4px;
-            border: 2px solid var(--primary);
-            border-radius: 50%;
-            position: relative;
-        }
-        .logo-ring img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-        
-        h1 { font-size: 22px; margin: 0; font-weight: 700; letter-spacing: -0.5px; }
-        .sub { color: var(--text-dim); font-size: 14px; margin-top: 4px; }
+/* HEADER */
+.header{text-align:center;padding:30px;}
+.logo{
+  width:140px;height:140px;margin:auto;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  padding:6px;animation:spin 8s linear infinite;
+}
+.logo img{width:100%;height:100%;border-radius:50%;}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.username{margin-top:15px;font-size:22px;color:var(--primary);}
 
-        /* Reward Display */
-        .reward-card {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(255, 255, 255, 0.05));
-            border-radius: 24px;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .icon-box {
-            width: 54px;
-            height: 54px;
-            background: var(--primary);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            font-weight: bold;
-            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
-        }
-        .reward-info small { color: var(--text-dim); display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
-        .reward-info b { font-size: 28px; color: #fff; }
+/* CARD */
+.card{
+  width:90%;margin:30px auto;background:var(--card);
+  border-radius:18px;padding:15px;
+}
+.card-content{display:flex;gap:12px;}
+.card img{width:80px;height:80px;border-radius:12px;}
+.price{font-size:22px;color:var(--secondary);margin:15px 0;}
+.buy-btn{
+  width:100%;padding:14px;border:none;border-radius:14px;
+  font-size:16px;font-weight:600;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  cursor:pointer;
+}
 
-        /* Input Fields */
-        .input-group { margin-bottom: 20px; text-align: left; }
-        label { display: block; margin-bottom: 8px; font-size: 13px; color: var(--text-dim); margin-left: 4px; }
-        input {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 14px;
-            padding: 16px;
-            color: #fff;
-            font-size: 15px;
-        }
-        input:focus { outline: none; border-color: var(--primary); background: rgba(0, 0, 0, 0.4); box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15); }
+/* MODALS */
+.overlay{
+  position:fixed;inset:0;display:none;
+  align-items:center;justify-content:center;
+  background:rgba(0,0,0,.85);
+}
+.box{
+  width:90%;background:var(--card);
+  padding:22px;border-radius:18px;text-align:center;
+}
+.amount{font-size:28px;color:var(--primary);margin:15px 0;}
+input{
+  width:100%;padding:12px;border-radius:12px;
+  border:none;margin-bottom:10px;
+}
+.btn{
+  width:100%;padding:14px;border:none;border-radius:14px;
+  font-size:16px;font-weight:600;cursor:pointer;
+}
+.apply{background:#1f2937;color:#fff;margin-bottom:10px;}
+.pay{background:linear-gradient(135deg,var(--primary),var(--secondary));}
 
-        /* Error States */
-        #upiError, #utrError { color: var(--error); font-size: 12px; margin-top: 6px; display: none; font-weight: 500; }
-        .shake { animation: shake 0.4s ease-in-out; border-color: var(--error) !important; }
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
-
-        /* Buttons */
-        .btn-pay {
-            width: 100%;
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 18px;
-            border-radius: 18px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        .btn-pay:hover { background: var(--primary-hover); transform: translateY(-2px); }
-        .btn-pay:active { transform: translateY(0); scale: 0.98; }
-
-        /* Custom Modal (Bottom Sheet style on Mobile) */
-        .modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.85);
-            backdrop-filter: blur(8px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            z-index: 100;
-        }
-        .modal-content {
-            background: #1e293b;
-            width: 100%;
-            max-width: 380px;
-            border-radius: 28px;
-            padding: 24px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.1);
-            animation: slideUp 0.4s ease-out;
-        }
-        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        
-        .qr-container { background: #fff; padding: 10px; border-radius: 18px; margin-bottom: 20px; }
-        .qr-container img { width: 100%; border-radius: 12px; }
-
-        /* Verification Screen */
-        .loader-screen {
-            position: fixed;
-            inset: 0;
-            background: var(--bg);
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 200;
-            text-align: center;
-        }
-        .spinner {
-            width: 60px;
-            height: 60px;
-            border: 5px solid rgba(255,255,255,0.1);
-            border-left-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-    </style>
+/* POPAT */
+.popat h1{color:#f87171;font-size:26px;}
+.congrats h1{color:#4ade80;font-size:26px;}
+</style>
 </head>
+
 <body>
 
-<div class="app">
-    <div class="top-bar">
-        <a href="https://t.me/nithunat" target="_blank" class="support-btn">Customer Care</a>
-    </div>
-
-    <div class="header">
-        <div class="logo-ring">
-            <img src="https://i.ibb.co/7JxbMKGG/images-26.jpg" alt="Logo">
-        </div>
-        <h1>Cashback Reward</h1>
-        <div class="sub">Fastest Payouts • Trusted Offer</div>
-    </div>
-
-    <div class="reward-card">
-        <div class="icon-box">₹</div>
-        <div class="reward-info">
-            <small>Guaranteed Cashback</small>
-            <b>₹49.00</b>
-        </div>
-    </div>
-
-    <div class="input-group">
-        <label>Enter UPI ID</label>
-        <input type="text" id="upi" placeholder="example@upi">
-        <div id="upiError">Please enter a valid UPI ID</div>
-    </div>
-
-    <button class="btn-pay" onclick="pay()">Pay ₹19 to Claim</button>
+<div class="header">
+  <div class="logo">
+    <img src="https://i.ibb.co/MxFkr3XM/images-29.jpg">
+  </div>
+  <div class="username">TORKA</div>
 </div>
 
-<div class="modal" id="modal">
-    <div class="modal-content">
-        <div class="qr-container">
-            <img src="https://i.ibb.co/d0sX6zjV/IMG-20251224-214557.jpg" alt="QR Code">
-        </div>
-        <h3 style="margin: 0 0 8px;">Scan & Pay ₹19</h3>
-        <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 20px;">Use any UPI app (PhonePe, GooglePay, Paytm)</p>
-        
-        <div class="input-group">
-            <label>UTR Number (12 Digits)</label>
-            <input type="number" id="utr" placeholder="1234XXXXXXXX" style="background: rgba(255,255,255,0.05);">
-            <div id="utrError">Invalid UTR. Please check and try again.</div>
-        </div>
-
-        <button class="btn-pay" style="background: var(--success);" onclick="submitUTR()">Verify Payment</button>
-        <p style="font-size: 11px; color: var(--text-dim); margin-top: 15px; cursor: pointer;" onclick="closeModal()">Go Back--></p>
+<div class="card">
+  <div class="card-content">
+    <img src="https://i.ibb.co/Kz7QRFB9/images-28.jpg">
+    <div>
+      <h3>Temp Mail App HTML Code</h3>
+      <p>Build in 15 minutes using AI</p>
     </div>
+  </div>
+  <div class="price">₹25</div>
+  <button class="buy-btn" onclick="openPay()">Buy Now</button>
 </div>
 
-<div class="loader-screen" id="loader">
-    <div class="spinner"></div>
-    <h2 style="margin: 0;">Verifying Payment</h2>
-    <p style="color: var(--text-dim); max-width: 250px; font-size: 14px; margin-top: 10px;">
-        Our automated system is verifying your UTR with the bank. Please check back in 24 hours.
-    </p>
+<!-- PAYMENT MODAL -->
+<div class="overlay" id="payModal">
+  <div class="box">
+    <h3>Apply Code (Optional)</h3>
+    <div class="amount" id="amt">₹25</div>
+
+    <input id="code" placeholder="Enter Code">
+    <button class="btn apply" onclick="applyCode()">Apply Code</button>
+    <button class="btn pay" onclick="payNow()">Pay Now</button>
+  </div>
+</div>
+
+<!-- POPAT MODAL -->
+<div class="overlay popat" id="popat">
+  <div class="box">
+    <h1>😂 POPAT BHAI 😂</h1>
+    <p>Galat code dala hai<br>₹25 hi dena padega</p><br>
+    <button class="btn pay" onclick="closePopat()">OK</button>
+  </div>
+</div>
+
+<!-- CONGRATS MODAL -->
+<div class="overlay congrats" id="congrats">
+  <div class="box">
+    <h1>🎉 Congratulations!</h1>
+    <p>Code Applied Successfully</p>
+    <div class="amount">₹1 Only</div>
+    <button class="btn pay" onclick="continuePay()">Continue</button>
+  </div>
 </div>
 
 <script>
-    const upiInput = document.getElementById('upi');
-    const upiError = document.getElementById('upiError');
-    const utrInput = document.getElementById('utr');
-    const utrError = document.getElementById('utrError');
-    const modal = document.getElementById('modal');
-    const loader = document.getElementById('loader');
+let codeApplied = false;
 
-    function pay() {
-        if (!upiInput.value.trim() || !upiInput.value.includes('@')) {
-            upiError.style.display = 'block';
-            upiInput.classList.add('shake');
-            setTimeout(() => upiInput.classList.remove('shake'), 400);
-            return;
-        }
-        upiError.style.display = 'none';
-        modal.style.display = 'flex';
-    }
+function openPay(){
+  payModal.style.display="flex";
+  amt.innerText="₹25";
+  codeApplied = false;
+}
 
-    function closeModal() {
-        modal.style.display = 'none';
-    }
+function applyCode(){
+  const code = document.getElementById("code").value.trim();
+  if(code === "A2I7KO"){
+    codeApplied = true;
+    amt.innerText="₹1";
+    payModal.style.display="none";
+    congrats.style.display="flex";
+  }
+  else if(code !== ""){
+    payModal.style.display="none";
+    popat.style.display="flex";
+  }
+}
 
-    function submitUTR() {
-        const utrVal = utrInput.value.trim();
-        
-        // Standard UPI UTR is 12 digits
-        if (utrVal.length < 12) {
-            utrError.style.display = 'block';
-            utrInput.classList.add('shake');
-            if (navigator.vibrate) navigator.vibrate(50);
-            setTimeout(() => utrInput.classList.remove('shake'), 400);
-            return;
-        }
+function closePopat(){
+  popat.style.display="none";
+  payModal.style.display="flex";
+}
 
-        utrError.style.display = 'none';
-        modal.style.display = 'none';
-        loader.style.display = 'flex';
-    }
+function continuePay(){
+  congrats.style.display="none";
+  payModal.style.display="flex";
+}
+
+function payNow(){
+  if(codeApplied){
+    window.location.href="https://rzp.io/rzp/FvKMmJb"; // old Razorpay
+  }else{
+    window.location.href="https://rzp.io/rzp/N8RV9jt"; // new Razorpay
+  }
+}
 </script>
 
 </body>
